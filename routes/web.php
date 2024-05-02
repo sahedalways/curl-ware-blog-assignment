@@ -3,10 +3,14 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// frontend controllers here
+use App\Http\Controllers\HomeController;
+
+
+// backend controllers are below
+
 
 
 //Clear route cache:
@@ -21,4 +25,33 @@ Route::get('/clear', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// navigate to the home or dashboard page
+Route::get('/', function (Request $request) {
+    if (Auth::check()) {
+        $userType = Auth::user()->user_type;
+
+        if ($userType == 'admin') {
+            return redirect()->route('dashboard');
+        } elseif ($userType == 'user') {
+            return view('frontend.dashboard.dashboard');
+        }
+    } else {
+        return view('auth.login');
+    }
+})->name('home');
+
+
+// only authenticated users and admin can access the below routes
+Route::middleware('is_user')->group(
+    function () {
+        Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+        // only admin can access below routes
+        Route::middleware('is_admin')->group(
+            function () {
+                // will have to define all routes those for admin
+            }
+        );
+    }
+);
