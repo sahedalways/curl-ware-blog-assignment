@@ -32,9 +32,9 @@ Auth::routes();
 // navigate to the home or dashboard page
 Route::get('/', function (Request $request) {
     // Query the blogs table to retrieve the latest blogs
-    $blogs = Blog::latest()->paginate(15);
+    $blogs = Blog::latest()->paginate(6);
 
-    return view('frontend.home', ['blogs' => $blogs]); #
+    return view('frontend.home', ['blogs' => $blogs]);
 })->name('home');
 
 
