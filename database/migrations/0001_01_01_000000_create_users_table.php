@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\UsersTableSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,10 +17,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->enum('user_type', ['admin', 'user'])->default('user');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // run users table seeder
+        $seeder = new UsersTableSeeder();
+        $seeder->run();
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
