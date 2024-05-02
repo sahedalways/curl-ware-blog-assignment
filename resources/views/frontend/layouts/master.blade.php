@@ -76,7 +76,7 @@
     <!--  END LOADER -->
 
     <!--  BEGIN NAVBAR  -->
-    @include('frontend.include.header_top')
+    @include('frontend.include.dashboard_header_top')
     <!--  END NAVBAR  -->
 
     <!--  BEGIN MAIN CONTAINER  -->
@@ -86,14 +86,13 @@
         <div class="search-overlay"></div>
 
         <!--  BEGIN SIDEBAR  -->
-        @include('frontend.include.sidebar')
+        @include('frontend.include.dashboard_sidebar')
         <!--  END SIDEBAR  -->
 
         <!--  BEGIN CONTENT AREA  -->
         <div id="content" class="main-content">
 
             @yield('content')
-
 
         </div>
         <!--  END CONTENT AREA  -->

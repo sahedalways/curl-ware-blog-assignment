@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Support\Facades\Auth;
 
 

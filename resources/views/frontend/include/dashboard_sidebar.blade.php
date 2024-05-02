@@ -56,7 +56,7 @@
                         id="blog" data-parent="#accordionExample">
 
                         <li class="{{ $route == 'blog.index' ? 'active' : '' }}">
-                            <a style="text-decoration: none;" href="{{ route('blog.index') }}">blog List</a>
+                            <a style="text-decoration: none;" href="{{ route('blog.index') }}">Blog List</a>
                         </li>
 
                         <li class="{{ $route == 'blog.create' ? 'active' : '' }}">

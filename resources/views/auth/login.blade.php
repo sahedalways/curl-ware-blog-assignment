@@ -2,60 +2,7 @@
 @section('title', 'Curl Ware - Login')
 @section('content')
 
-    <style>
-        .nav-link {
-            background: #dee3ff;
-            color: red;
-            -webkit-text-fill-color: #3F51B5;
-        }
 
-        .nav-link.active {
-            background: #3F51B5 !important;
-            -webkit-text-fill-color: #fff !important;
-            color: #fff;
-        }
-
-        .nav-link {
-            color: #fff;
-        }
-
-        /* .form-group input {
-                                                            background: #809f86;
-                                                        } */
-        .full-height-center-content {
-            min-height: calc(100vh - 93px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custom-link {
-            color: gray;
-        }
-
-        .custom-link:hover {
-            color: black !important;
-        }
-
-        .form-check-input:checked {
-            background-color: #6c5ce7;
-            border-color: #6c5ce7;
-        }
-
-        .nav-link.active:before {
-            display: block;
-            content: "";
-            width: 100%;
-            height: 2px;
-            bottom: 5px;
-            left: 0;
-            bottom: -3px;
-            z-index: 0;
-            position: absolute;
-            background: #3f51b5;
-            transition: all 0.3s ease-in-out;
-        }
-    </style>
 
     <div style="background: #ededed;" class="">
 

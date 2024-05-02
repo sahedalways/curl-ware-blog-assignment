@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 // frontend controllers here
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Blog\BlogController;
-
-
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\RegisterTabController;
+use App\Models\Blog;
+use Illuminate\Http\Request;
 
 // backend controllers are below
 
@@ -30,17 +31,23 @@ Auth::routes();
 
 // navigate to the home or dashboard page
 Route::get('/', function (Request $request) {
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    } else {
-        return view('auth.login');
-    }
+    // Query the blogs table to retrieve the latest blogs
+    $blogs = Blog::latest()->paginate(15);
+
+    return view('frontend.home', ['blogs' => $blogs]); #
 })->name('home');
+
+
+// blog details page route here
+Route::get('/blog-details/{id}', [PagesController::class, 'blogItemDetails'])->name('blog-details');
+
+
+// register tab route
+Route::get('/register-process', [RegisterTabController::class, 'getRegisterTab'])->name('register.tab');
 
 
 // access dashboard route
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-
 
 
 // only user can access below routes
