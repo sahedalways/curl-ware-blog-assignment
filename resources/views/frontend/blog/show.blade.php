@@ -1,6 +1,6 @@
-@extends('backend.layouts.master')
+@extends('frontend.layouts.master')
 
-@section('title', 'Article List')
+@section('title', `{{ auth()->user()->name }}'s Blog List`)
 
 @section('style')
 
@@ -54,21 +54,21 @@
                 <div class="widget-content widget-content-area">
                     <div class="mb-4 d-flex align-items-center justify-content-between flex-wrap">
                         <a class="btn btn-sm btn-primary float-right mr-md-4 mb-md-0 mb-3"
-                            href="{{ route('article.create') }}">
+                            href="{{ route('blog.create') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-plus">
                                 <line x1="12" y1="5" x2="12" y2="19"></line>
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                             </svg>
-                            Create New Article
+                            Create New Blog
                         </a>
 
-                        {{-- search game --}}
+                        {{-- search blog --}}
                         <form class="mb-0" method="get">
                             <div class="float-right d-flex align-items-center">
                                 <input class="form-control float-left mr-3" name="q" value="{{ request('q') }}"
-                                    type="text" placeholder="search">
+                                    type="text" placeholder="Search by title">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
@@ -82,50 +82,37 @@
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Author</th>
-                                <th>Display Priority</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($articleData as $key => $item)
-                                <tr class='clickable-row' data-href='{{ route('article.edit', $item->id) }}'>
+                            @foreach ($blogsData as $key => $item)
+                                <tr class='clickable-row' data-href='{{ route('blog.edit', $item->id) }}'>
                                     <td class="checkbox-column text-center"> {{ ++$key }} </td>
-                                    <td class="text-center">
+                                    <td>
                                         {{ $item->title }}
                                     </td>
-                                    <td class="text-center">
-                                        {!! html_entity_decode($item->description) !!}
+                                    <td>
+                                        {!! html_entity_decode(substr($item->content, 0, 100)) !!} @if (strlen($item->content) > 100)
+                                            ...
+                                        @endif
                                     </td>
                                     <td>
                                         @if ($item->image)
-                                            <img src="{{ asset('images/article' . "/{$item->id}-1.{$item->image}") }}"
-                                                alt="article-image" style="max-width: 100px; max-height: 100px;">
+                                            <img src="{{ asset('images/blog' . "/{$item->id}-1.{$item->image}") }}"
+                                                alt="blog-image" style="max-width: 100px; max-height: 100px;">
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        {{ $item->author }}
+                                        {{ $item->author->name }}
                                     </td>
-
-                                    @if ($item->display_priority == 'first')
-                                        <td class="text-center">
-                                            First
-                                        </td>
-                                    @elseif($item->display_priority == 'middle')
-                                        <td class="text-center">
-                                            Middle
-                                        </td>
-                                    @else
-                                        <td class="text-center">
-                                            Last
-                                        </td>
-                                    @endif
 
 
                                     <td class="text-center">
                                         <ul class="table-controls">
 
                                             <li>
-                                                <a href="{{ route('article.edit', $item->id) }}" class="bs-tooltip"
+                                                <a href="{{ route('blog.edit', $item->id) }}" class="bs-tooltip"
                                                     data-toggle="tooltip" data-placement="top" title=""
                                                     data-original-title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -140,7 +127,7 @@
 
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    onclick="event.preventDefault(); if(confirm('Are you really want to delete?')){ document.getElementById('article-delete-{{ $item->id }}').submit() }"
+                                                    onclick="event.preventDefault(); if(confirm('Are you really want to delete?')){ document.getElementById('blog-delete-{{ $item->id }}').submit() }"
                                                     class="bs-tooltip" data-toggle="tooltip" data-placement="top"
                                                     title="" data-original-title="Delete">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -158,8 +145,8 @@
                                         </ul>
                                     </td>
                                     {{-- delete --}}
-                                    <form method="post" action="{{ route('article.destroy', $item->id) }}"
-                                        id="{{ 'article-delete-' . $item->id }}">
+                                    <form method="post" action="{{ route('blog.destroy', $item->id) }}"
+                                        id="{{ 'blog-delete-' . $item->id }}">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -167,7 +154,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $articleData->appends(request()->query())->links('pagination::bootstrap-4') }}
+                    {{ $blogsData->appends(request()->query())->links('pagination::bootstrap-4') }}
 
                 </div>
             </div>
@@ -179,6 +166,7 @@
 
 @section('script')
 
+    {{-- for datatable js from here --}}
     <script src="{{ asset('admin_assets') }}/plugins/table/datatable/datatables.js"></script>
     <script>
         // var e;

@@ -1,6 +1,6 @@
-@extends('backend.layouts.master')
+@extends('frontend.layouts.master')
 
-@section('title', 'Edit Article')
+@section('title', 'Edit Blog')
 
 @section('content')
 
@@ -20,16 +20,16 @@
                 {{-- display success message --}}
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h5>Edit Article</h5>
-                        <a class="btn btn-sm btn-primary float-right mb-3" href="{{ route('article.index') }}">
-                            <i class="fas fa-list"></i> Article List
+                        <h5>Edit Blog</h5>
+                        <a class="btn btn-sm btn-primary float-right mb-3" href="{{ route('blog.index') }}">
+                            <i class="fas fa-list"></i> Blog List
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="offset-1 col-xl-10 col-md-10 col-sm-10 col-10">
-                <form id="my-form" class="needs-validation" action="{{ route('article.update', $articleDetail->id) }}"
+                <form id="my-form" class="needs-validation" action="{{ route('blog.update', $blogDetail->id) }}"
                     method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -42,7 +42,7 @@
                                 <input id="title" type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     placeholder="ex. Artificial Intelligence in Modern Society"
-                                    value="{{ $articleDetail->title }}" name="title">
+                                    value="{{ $blogDetail->title }}" name="title">
                                 @error('title')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -55,8 +55,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Description<sup style="color:red;">(*)</sup></label>
-                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="description"> {{ $articleDetail->description }}</textarea>
-                                @error('description')
+                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="content"> {{ $blogDetail->content }}</textarea>
+                                @error('content')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -71,9 +71,9 @@
                                 <label>Image<sup style="color:red;">(*)</sup></label>
                                 <input class="form-control" id="image" name="image" type="file"
                                     accept="image/jpeg, image/png, image/jpg, image/gif">
-                                @if (file_exists('images\article' . "/{$articleDetail->id}-1.{$articleDetail->image}"))
+                                @if (file_exists('images\blog' . "/{$blogDetail->id}-1.{$blogDetail->image}"))
                                     <img id="image-preview"
-                                        src="{{ asset('images\article' . "/{$articleDetail->id}-1.{$articleDetail->image}") ?? 'default_image_url' }}"
+                                        src="{{ asset('images\blog' . "/{$blogDetail->id}-1.{$blogDetail->image}") ?? 'default_image_url' }}"
                                         alt="default_article_image" style="max-width: 100px; max-height: 100px;">
                                 @endif
                                 @error('image')
@@ -82,45 +82,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Author<sup style="color:red;">(*)</sup></label>
-                                <input id="author" type="text"
-                                    class="form-control @error('author') is-invalid @enderror" placeholder="ex. John Doe"
-                                    value="{{ $articleDetail->author }}" name="author">
-                                @error('author')
-                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Display Priority<sup style="color:red;">(*)</sup></label>
-                                <select id="display_priority"
-                                    class="form-control @error('display_priority') is-invalid @enderror"
-                                    name="display_priority">
-                                    <option value="first"
-                                        {{ $articleDetail->display_priority == 'first' ? 'selected' : '' }}>First</option>
-                                    <option value="middle"
-                                        {{ $articleDetail->display_priority == 'middle' ? 'selected' : '' }}>Middle
-                                    </option>
-                                    <option value="last"
-                                        {{ $articleDetail->display_priority == 'last' ? 'selected' : '' }}>Last</option>
-                                </select>
-                                @error('display_priority')
-                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
 
 
 
@@ -148,6 +109,7 @@
 
     <script src="{{ asset('/admin_assets') }}/ckeditor/classic/ckeditor.js"></script>
     <script>
+        // text editor js here
         ClassicEditor
             .create(document.querySelector('#editor'), {
                 // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
@@ -166,6 +128,7 @@
             slug.value = rep(e.target.value, " ", "-")
         });
 
+        // for showing image js here
         document.getElementById('image').addEventListener('change', function(event) {
             var preview = document.getElementById('image-preview');
             var file = event.target.files[0];

@@ -15,10 +15,16 @@ class BlogController extends Controller
     // search query
     $q = $request->input('q');
 
-    $blogs = Blog::latest();
+    // Retrieve the current user's ID
+    $user_id = auth()->id();
 
+    // Query the blogs table to retrieve the latest blogs created by the current user
+    $blogs = Blog::where('author_id', $user_id)->latest();
+
+
+    // add search query here
     if ($q) {
-      $blogs = $blogs->orWhere('title', 'like', '%' . $q . '%');
+      $blogs = $blogs->where('title', 'like', '%' . $q . '%');
     }
 
     $blogsData = $blogs->paginate(15);
@@ -44,6 +50,7 @@ class BlogController extends Controller
 
       $validatedData['created_at'] = now();
       $validatedData['updated_at'] = now();
+      $validatedData['author_id'] = auth()->id();
 
       // Process the image
       if ($request->hasFile('image')) {
@@ -128,6 +135,6 @@ class BlogController extends Controller
     $blog = Blog::findOrFail($id);
 
     $blog->delete();
-    return redirect('/blog')->with('warning', 'You just deleted an article');
+    return redirect('/blog')->with('warning', 'You just deleted a blog');
   }
 }

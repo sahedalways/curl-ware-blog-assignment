@@ -8,10 +8,10 @@
 @section('content')
     <div class="layout-px-spacing">
 
-        @if (in_array(auth()->user()->user_type, ['user']))
+        @if (in_array(auth()->user()->user_type, ['admin', 'manager']))
             <div class="row layout-top-spacing">
 
-                {{-- start display error message --}}
+                {{-- display error message --}}
                 @if (Session::has('sms'))
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -22,11 +22,7 @@
                         </div>
                     </div>
                 @endif
-                {{-- // end display error message --}}
-
-
-
-            </div>
+                {{-- //display error message --}}
         @endif
 
     </div>

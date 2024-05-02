@@ -1,6 +1,6 @@
-@extends('backend.layouts.master')
+@extends('frontend.layouts.master')
 
-@section('title', 'Create New Article')
+@section('title', 'Create New Blog')
 
 @section('content')
 
@@ -17,19 +17,20 @@
                         </button>
                     </div>
                 @endif
+
                 {{-- display success message --}}
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h5>Create New Article</h5>
-                        <a class="btn btn-sm btn-primary float-right mb-3" href="{{ route('article.index') }}">
-                            <i class="fas fa-list"></i> Article List
+                        <h5>Create New Blog</h5>
+                        <a class="btn btn-sm btn-primary float-right mb-3" href="{{ route('blog.index') }}">
+                            <i class="fas fa-list"></i> Blog List
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="offset-1 col-xl-10 col-md-10 col-sm-10 col-10">
-                <form id="my-form" class="needs-validation" action="{{ route('article.store') }}" method="post"
+                <form id="my-form" class="needs-validation" action="{{ route('blog.store') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -54,8 +55,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Description<sup style="color:red;">(*)</sup></label>
-                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="description"> {{ old('description') }} </textarea>
-                                @error('description')
+                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="content"> {{ old('content') }} </textarea>
+                                @error('content')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -79,40 +80,6 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Author<sup style="color:red;">(*)</sup></label>
-                                <input id="author" type="text"
-                                    class="form-control @error('author') is-invalid @enderror" placeholder="ex. John Doe"
-                                    value="{{ old('author') }}" name="author">
-                                @error('author')
-                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Display Priority<sup style="color:red;">(*)</sup></label>
-                                <select id="display_priority" class="form-control @error('priority') is-invalid @enderror"
-                                    name="display_priority">
-                                    <option value="first">First</option>
-                                    <option value="middle" selected>Middle</option>
-                                    <option value="last">Last</option>
-                                </select>
-                                @error('display_priority')
-                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-
-
 
                     <div class="form-group mb-3">
                         <button id="submit" type="submit" class="btn btn-primary mt-3">Save</button>
@@ -131,16 +98,17 @@
 @endsection
 
 @section('script')
+    {{-- custom js files here --}}
     <script src="{{ asset('admin_assets') }}/assets/js/scrollspyNav.js"></script>
     <script src="{{ asset('admin_assets') }}/plugins/select2/select2.min.js"></script>
     <script src="{{ asset('admin_assets') }}/plugins/select2/custom-select2.js"></script>
-
-
     <script src="{{ asset('/admin_assets') }}/ckeditor/classic/ckeditor.js"></script>
+
     <script>
+        // text editor js here
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+
             })
             .then(editor => {
                 window.editor = editor;
@@ -156,6 +124,7 @@
             slug.value = rep(e.target.value, " ", "-")
         });
 
+        // for showing selected image js here
         document.getElementById('image').addEventListener('change', function(event) {
             var preview = document.getElementById('image-preview');
             var file = event.target.files[0];
