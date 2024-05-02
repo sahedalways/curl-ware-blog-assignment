@@ -32,7 +32,6 @@ $(document).ready(function () {
     function validateRegisterForm() {
         var name = $("#name").val();
         var email = $("#registerEmail").val();
-        var phone_number = $("#phone_number").val();
         var password = $("#registerPassword").val();
         var password_confirmation = $("#password_confirmation").val();
 
@@ -40,14 +39,12 @@ $(document).ready(function () {
         $(
             "#name_error",
             "#register_email_error",
-            "#phone_number_error",
             "#register_password_error",
             "#confirm_password_error"
         ).text("");
         $(
             "#registerEmail",
             "#name",
-            "#phone_number",
             "#registerPassword",
             "#password_confirmation"
         ).css("border-color", "");
@@ -69,40 +66,12 @@ $(document).ready(function () {
             $("#registerEmail").css("border-color", "red");
         }
 
-        if (!phone_number) {
-            $("#phone_number_error")
-                .text("Phone number is required.")
-                .css("color", "red");
-            $("#phone_number").css("border-color", "red");
-        } else if (!/^\d+$/.test(phone_number)) {
-            $("#phone_number_error")
-                .text(
-                    "Please enter a valid phone number with only numeric digits."
-                )
-                .css("color", "red");
-            $("#phone_number").css("border-color", "red");
-        } else if (phone_number.length > 15) {
-            $("#phone_number_error")
-                .text("Phone number should not exceed 15 digits.")
-                .css("color", "red");
-            $("#phone_number").css("border-color", "red");
-        }
-
         if (!password) {
             $("#register_password_error")
                 .text("Password is required.")
                 .css("color", "red");
             $("#registerPassword").css("border-color", "red");
         }
-
-        // else if (!validatePassword(password)) {
-        //     $("#register_password_error")
-        //         .text(
-        //             "Password must be 8-20 characters, include at least 1 special character, and 1 number."
-        //         )
-        //         .css("color", "red");
-        //     $("#registerPassword").css("border-color", "red");
-        // }
 
         if (password != password_confirmation) {
             $("#confirm_password_error")
@@ -114,7 +83,6 @@ $(document).ready(function () {
         // Check if there are any errors
         if (
             $("#confirm_password_error").text() ||
-            $("#phone_number_error").text() ||
             $("#register_email_error").text() ||
             $("#name_error").text() ||
             $("#register_password_error").text()
@@ -125,7 +93,6 @@ $(document).ready(function () {
         // Set the values if they are valid
         $("#registerEmail").val(email);
         $("#name").val(name);
-        $("#phone_number").val(phone_number);
         $("#registerPassword").val(password);
         $("#password_confirmation").val(password_confirmation);
 
@@ -190,62 +157,11 @@ $(document).ready(function () {
         }
     });
 
-    // phone number error handling
-    $("body").on("input", "#phone_number", function () {
-        var phone_number = $(this).val().trim();
-
-        if (!/^\d+$/.test(phone_number)) {
-            $("#phone_number_error")
-                .text(
-                    "Please enter a valid phone number with only numeric digits."
-                )
-                .css("color", "red");
-            $("#phone_number").css("border-color", "red");
-        } else if (phone_number.length > 15) {
-            $("#phone_number_error")
-                .text("Phone number should not exceed 15 digits.")
-                .css("color", "red");
-            $("#phone_number").css("border-color", "red");
-        } else {
-            if (!phone_number) {
-                $("#phone_number_error")
-                    .text("Phone number is required.")
-                    .css("color", "red");
-                $("#phone_number").css("border-color", "red");
-            } else {
-                $("#phone_number_error").text("");
-                $("#phone_number").css("border-color", "");
-            }
-        }
-
-        // If there is a valid phone number, update the input value
-        if (phone_number) {
-            $(this).val(phone_number);
-        } else {
-            $(this).val("");
-        }
-    });
-
-    function validatePassword(password) {
-        // Password should be 8-20 characters, have at least 1 special character, and at least 1 number
-        var passwordRegex =
-            /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
-        return passwordRegex.test(password);
-    }
-
     // Password input event handler
     $("#registerPassword").on("input", function () {
         var password = $(this).val();
         var passwordError = $("#register_password_error");
 
-        // if (!validatePassword(password)) {
-        //     passwordError
-        //         .text(
-        //             "Password must be 8-20 characters, include at least 1 special character, and 1 number."
-        //         )
-        //         .css("color", "red");
-        //     $(this).css("border-color", "red");
-        // } else if (!password) {
         if (!password) {
             passwordError.text("Password is required.").css("color", "red");
             $(this).css("border-color", "red");

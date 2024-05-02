@@ -29,29 +29,20 @@ Auth::routes();
 // navigate to the home or dashboard page
 Route::get('/', function (Request $request) {
     if (Auth::check()) {
-        $userType = Auth::user()->user_type;
-
-        if ($userType == 'admin') {
-            return redirect()->route('dashboard');
-        } elseif ($userType == 'user') {
-            return view('frontend.dashboard.dashboard');
-        }
+        return redirect()->route('dashboard');
     } else {
         return view('auth.login');
     }
 })->name('home');
 
 
-// only authenticated users and admin can access the below routes
-Route::middleware('is_user')->group(
-    function () {
-        Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+// access dashboard route
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-        // only admin can access below routes
-        Route::middleware('is_admin')->group(
-            function () {
-                // will have to define all routes those for admin
-            }
-        );
+
+// only admin can access below routes
+Route::middleware('is_admin')->group(
+    function () {
+        // will have to define all routes those for admin
     }
 );
