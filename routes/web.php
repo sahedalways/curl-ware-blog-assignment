@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 // frontend controllers here
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Blog\BlogController;
 
 
 // backend controllers are below
@@ -38,6 +39,16 @@ Route::get('/', function (Request $request) {
 
 // access dashboard route
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+
+
+// only user can access below routes
+Route::middleware('is_user')->group(
+    function () {
+        // blogs route here
+        Route::resource('blog', BlogController::class);
+    }
+);
 
 
 // only admin can access below routes
