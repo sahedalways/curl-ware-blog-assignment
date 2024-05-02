@@ -15,7 +15,9 @@ class BlogsTableSeeder extends Seeder
             'title' => 'The Importance of Regular Exercise',
             'image' => 'jpg',
             'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et justo nec nulla tristique venenatis at nec mi. Nulla facilisi. Suspendisse potenti.',
-            'author_id' => 1
+            'author_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         // Add blog 2
@@ -23,7 +25,9 @@ class BlogsTableSeeder extends Seeder
             'title' => 'Healthy Eating Habits for a Better Life',
             'image' => 'jpg',
             'content' => 'Sed ullamcorper vehicula tortor, id vestibulum elit finibus vitae. Fusce sed sodales nisi. Curabitur dignissim tristique sapien, vel feugiat mi tempor vitae.',
-            'author_id' => 1
+            'author_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
