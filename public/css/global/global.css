@@ -110,6 +110,10 @@
     cursor: pointer !important;
 }
 
+.press-author {
+    margin-bottom: -0.6px;
+}
+
 .custom-height {
     height: 250px;
 }

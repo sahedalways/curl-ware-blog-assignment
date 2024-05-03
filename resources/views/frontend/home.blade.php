@@ -17,7 +17,7 @@
                                  <div class="content-sec p-4 ">
                                      <h4 class="fw-semibold text-dark">{{ $blog->title }}</h4>
                                      <p class="press-author">{{ $blog->author->name }}</p>
-                                     <div style="font-size: 12px;" class="text-secondary  fw-semibold">
+                                     <div style="font-size: 12px;" class="text-secondary  fw-semibold mb-3">
                                          {{ $blog->created_at->format('F d, Y') }}</div>
                                      <p class="press-desc">
                                          {!! substr(html_entity_decode($blog->content), 0, 50) !!}
