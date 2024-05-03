@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 // frontend controllers here
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Blog\BlogController;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\Blog\CommentController;
 use App\Http\Controllers\RegisterTabController;
 use App\Models\Blog;
 use Illuminate\Http\Request;
@@ -41,9 +41,15 @@ Route::get('/', function (Request $request) {
 // blog details page route here
 Route::get('/blog-details/{id}', [BlogController::class, 'blogItemDetails'])->name('blog-details');
 
-// for posting comment on specific blog item route
-Route::post('/post-comment', [BlogController::class, 'postComment'])->name('post-comment');
 
+// for comment related routes on specific blog item route
+Route::controller(CommentController::class)->group(
+    function () {
+        Route::post('/post-comment', 'store')->name('post-comment');
+        Route::get('/get-comment/{commentId}', 'index')->name('get-comment');
+        Route::post('/update-comment', 'update')->name('update-comment');
+    }
+);
 
 // register tab route
 Route::get('/register-process', [RegisterTabController::class, 'getRegisterTab'])->name('register.tab');

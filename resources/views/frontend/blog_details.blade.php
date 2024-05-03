@@ -23,6 +23,9 @@
 
       <!--  comment box of blog  -->
       @include('frontend.components._comment_box')
+
+      {{-- edit comment model --}}
+      @include('frontend.components._edit_comment_modal')
   @endsection
 
   @section('script')

@@ -7,17 +7,37 @@
                 <div class="comments-container mt-4 d-flex text-justify float-left mb-3">
                     @foreach ($blog->comments as $comment)
                         <div class="comment mb-3">
-                            <h4>{{ $comment->author_name }}</h4>
+                            <h4 id="author_name_text_{{ $comment->id }}">{{ $comment->author_name }}</h4>
                             <span>- {{ $comment->created_at->format('F d, Y') }}</span>
                             <br>
-                            <p>{{ $comment->text }}</p>
+                            <p id="comment_text_{{ $comment->id }}">{{ $comment->text }}</p>
+
+                            <div class="comment-edit-dlt">
+                                <!-- Edit Icon -->
+                                <a class="edit-icon text-white edit_comment_btn" data-comment-id="{{ $comment->id }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+
+                                <!-- Delete Icon -->
+                                {{-- <form action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a type="submit" class="text-white">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </form> --}}
+                            </div>
+
                         </div>
                     @endforeach
 
                 </div>
             </div>
             <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-5">
-                <form id="comment-box-form" class="comment-form" method="POST" data-action="{{ route('post-comment') }}">
+                <form id="comment-box-form" class="comment-form" method="POST"
+                    data-action="{{ route('post-comment') }}">
                     @csrf
                     <div class="form-group">
                         <h4>Leave a comment</h4>
@@ -53,5 +73,8 @@
                         Loading</button></div>
             </div>
         </div>
+
     </div>
+
+
 </section>

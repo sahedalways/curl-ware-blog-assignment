@@ -150,27 +150,4 @@ class BlogController extends Controller
 
     return view('frontend.blog_details', ['blog' => $blog]);
   }
-
-
-
-  public function postComment(Request $request)
-  {
-    $validatedData = $request->validate([
-      'comment' => 'required|max:255',
-      'blog_id' => 'required'
-    ]);
-
-    // Create a new comment instance
-    $comment = new Comment();
-
-    // Assign values to the comment properties
-    $comment->blog_id = $request->blog_id;
-    $comment->author_name = $request->author_name;
-    $comment->text = $request->comment;
-
-    $comment->save();
-
-
-    return response()->json(['comment' => $comment]);
-  }
 }
