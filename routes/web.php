@@ -48,6 +48,7 @@ Route::controller(CommentController::class)->group(
         Route::post('/post-comment', 'store')->name('post-comment');
         Route::get('/get-comment/{commentId}', 'index')->name('get-comment');
         Route::post('/update-comment', 'update')->name('update-comment');
+        Route::post('/delete-comment', 'destroy')->name('delete-comment');
     }
 );
 

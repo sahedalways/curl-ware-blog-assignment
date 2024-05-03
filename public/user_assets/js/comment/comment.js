@@ -72,21 +72,23 @@ $(document).ready(function () {
                     var commentId = comment.id;
                     var createdAt = new Date(comment.created_at);
                     var formattedDate =
-                        createdAt.getDate() +
-                        " " +
                         monthNames[createdAt.getMonth()] +
+                        " " +
+                        createdAt.getDate() +
                         ", " +
                         createdAt.getFullYear();
 
                     // Construct the HTML for the new comment
                     var newCommentHtml =
-                        "<div class='comment mb-3'>" +
+                        "<div class='comment mb-3' id='comment_" +
+                        commentId +
+                        "'>" +
                         "<h4 id='author_name_text_" +
                         commentId +
                         "'>" +
                         comment.author_name +
                         "</h4>" +
-                        "<span>- " +
+                        "<span> - " +
                         formattedDate +
                         "</span>" +
                         "<br>" +
@@ -101,6 +103,11 @@ $(document).ready(function () {
                         "'>" +
                         "<i class='fas fa-edit'></i>" +
                         "</a>" +
+                        "<a class='text-white dlt_comment_btn' data-comment-id='" +
+                        commentId +
+                        "'>" +
+                        "<i class='fas fa-trash'></i>" +
+                        "</a>" +
                         "</div>" +
                         "</div>";
 
@@ -111,6 +118,11 @@ $(document).ready(function () {
                         .find(".edit_comment_btn")
                         .first()
                         .on("click", openModal);
+
+                    $(".comments-container")
+                        .find(".dlt_comment_btn")
+                        .first()
+                        .on("click", deleteItem);
 
                     // open edit comment modal
                     function openModal(event) {
@@ -133,6 +145,61 @@ $(document).ready(function () {
         }
     });
 
+    // after clicking delete comment button
+    $(".dlt_comment_btn").on("click", function () {
+        // Extract the comment ID from the button's data attribute
+        var commentId = $(this).data("comment-id");
+
+        // Prepare the form data including the comment ID
+        var formData = {
+            comment_id: commentId,
+        };
+
+        $.ajax({
+            url: `/delete-comment`,
+            type: "post",
+            data: formData,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                toastr.success("Your comment has been deleted.");
+                $("#comment_" + commentId).remove();
+            },
+            error: function (xhr, status, error) {
+                var response = xhr.responseJSON;
+                toastr.error(response.message);
+            },
+        });
+    });
+
+    // Function to handle deletion of items
+    function deleteItem() {
+        // Extract the comment ID from the button's data attribute
+        var commentId = $(this).data("comment-id");
+
+        // Prepare the form data including the comment ID
+        var formData = {
+            comment_id: commentId,
+        };
+
+        $.ajax({
+            url: `/delete-comment`,
+            type: "post",
+            data: formData,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                toastr.success("Your comment has been deleted.");
+                $("#comment_" + commentId).remove();
+            },
+            error: function (xhr, status, error) {
+                var response = xhr.responseJSON;
+                toastr.error(response.message);
+            },
+        });
+    }
     // validate comment box form
     function validateCommentBoxForm() {
         var comment = $("#comment").val();

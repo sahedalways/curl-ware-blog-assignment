@@ -96,6 +96,10 @@
     margin-right: 10px;
 }
 
+.dlt_comment_btn {
+    cursor: pointer;
+}
+
 .comment-edit-dlt {
     display: flex;
     flex-direction: row;

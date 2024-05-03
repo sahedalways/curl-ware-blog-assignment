@@ -30,9 +30,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="comment-edit-submit-btn" class="btn btn-primary">Edit Comment</button>
+                <button type="button" id="comment-edit-submit-btn" class="btn btn-primary">Update Comment</button>
                 <button hidden disabled type="button" class="btn btn-primary" id="loadingEditSubmittingBtn">
-                    <i class="fa fa-spinner fa-spin me-3"></i>Loading
+                    <i class="fa fa-spinner fa-spin me-3"></i>Updating
                 </button>
             </div>
         </div>

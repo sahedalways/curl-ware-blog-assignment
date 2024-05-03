@@ -6,7 +6,7 @@
                 <h1 class="text-dark mt-5">Comments</h1>
                 <div class="comments-container mt-4 d-flex text-justify float-left mb-3">
                     @foreach ($blog->comments as $comment)
-                        <div class="comment mb-3">
+                        <div class="comment mb-3" id="comment_{{ $comment->id }}">
                             <h4 id="author_name_text_{{ $comment->id }}">{{ $comment->author_name }}</h4>
                             <span>- {{ $comment->created_at->format('F d, Y') }}</span>
                             <br>
@@ -20,14 +20,10 @@
 
 
                                 <!-- Delete Icon -->
-                                {{-- <form action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="submit" class="text-white">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </form> --}}
+                                <a class="text-white dlt_comment_btn" data-comment-id="{{ $comment->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+
                             </div>
 
                         </div>

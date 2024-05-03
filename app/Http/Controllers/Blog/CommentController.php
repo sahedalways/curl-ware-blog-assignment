@@ -104,8 +104,20 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        // Retrieve the comment ID from the request
+        $commentId = $request->input('comment_id');
+
+        try {
+            // Find the comment by its ID and delete it
+            $comment = Comment::findOrFail($commentId);
+            $comment->delete();
+
+            return response()->json(['success' => true, 'message' => 'Comment deleted successfully']);
+        } catch (\Exception $e) {
+            // Handle any errors
+            return response()->json(['success' => false, 'message' => 'Failed to delete comment']);
+        }
     }
 }
