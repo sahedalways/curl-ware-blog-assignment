@@ -1,11 +1,11 @@
-After clone Git repo or After unzipping the file:
 
+After cloning the Git repository or unzipping the file, follow these steps:
 
-composer install
-npm install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
-php artisan migrate:fresh --seed
-npm run dev (Don't close this)
-php artisan serve
+1. Run 'composer install' to install PHP dependencies.
+2. Run 'npm install' to install JavaScript dependencies.
+3. Copy the .env.example file to .env by running cp .env.example .env.
+4. Generate an application key by running 'php artisan key:generate'.
+5. Migrate the database by running 'php artisan migrate'.
+6. Optionally, seed the database with fresh data by running 'php artisan migrate:fresh --seed'.
+7. Compile the assets by running 'npm run dev' (Keep this process running).
+8. Finally, start the Laravel development server by running 'php artisan serve'.
