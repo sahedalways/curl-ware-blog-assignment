@@ -8,9 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
 
-    {{-- favicon here --}}
-    {{-- <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}"> --}}
-
     <!-- Global CSS -->
     <link rel="stylesheet" href="{{ asset('css/global/global.css') }}">
     <link href="{{ asset('/admin_assets') }}/assets/css/loader.css" rel="stylesheet" type="text/css" />
