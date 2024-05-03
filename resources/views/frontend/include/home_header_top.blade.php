@@ -18,7 +18,7 @@
             <!-- Logo -->
             <div>
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/main-logo.png') }}" alt="Logo"
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo"
                         class="d-inline-block align-top col-md-4 col-8">
                 </a>
             </div>
@@ -74,7 +74,7 @@
             <!-- Logo -->
             <div class="">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/main-logo.png') }}" alt="Logo"
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo"
                         class="d-inline-block align-top col-xl-6 col-lg-10 col-8">
                 </a>
             </div>

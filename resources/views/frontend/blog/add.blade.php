@@ -42,7 +42,7 @@
                                 <input id="title" type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     placeholder="ex. Artificial Intelligence in Modern Society" value="{{ old('title') }}"
-                                    name="title">
+                                    name="title" style="background-color: rgb(255, 255, 255);">
                                 @error('title')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -55,7 +55,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Description<sup style="color:red;">(*)</sup></label>
-                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="content"> {{ old('content') }} </textarea>
+                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="content"
+                                    style="background-color: rgb(255, 255, 255);"> {{ old('content') }} </textarea>
                                 @error('content')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -69,7 +70,8 @@
                             <div class="form-group">
                                 <label>Image<sup style="color:red;">(*)</sup></label>
                                 <input class="form-control" id="image" name="image" type="file"
-                                    accept="image/jpeg, image/png, image/jpg, image/gif" required>
+                                    accept="image/jpeg, image/png, image/jpg, image/gif" required
+                                    style="background-color: rgb(255, 255, 255);">
                                 <img class="mt-2" id="image-preview" src=""
                                     style="max-width: 100px; max-height: 100px;">
                                 @error('image')

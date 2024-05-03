@@ -42,7 +42,8 @@
                                 <input id="title" type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     placeholder="ex. Artificial Intelligence in Modern Society"
-                                    value="{{ $blogDetail->title }}" name="title">
+                                    value="{{ $blogDetail->title }}" name="title"
+                                    style="background-color: rgb(255, 255, 255);">
                                 @error('title')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -55,7 +56,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Description<sup style="color:red;">(*)</sup></label>
-                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="content"> {{ $blogDetail->content }}</textarea>
+                                <textarea cols="10" rows="4" class="jqte-test" id="editor" name="content"
+                                    style="background-color: rgb(255, 255, 255);"> {{ $blogDetail->content }}</textarea>
                                 @error('content')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -70,7 +72,8 @@
                             <div class="form-group">
                                 <label>Image<sup style="color:red;">(*)</sup></label>
                                 <input class="form-control" id="image" name="image" type="file"
-                                    accept="image/jpeg, image/png, image/jpg, image/gif">
+                                    accept="image/jpeg, image/png, image/jpg, image/gif"
+                                    style="background-color: rgb(255, 255, 255);">
                                 @if (file_exists('images\blog' . "/{$blogDetail->id}-1.{$blogDetail->image}"))
                                     <img id="image-preview"
                                         src="{{ asset('images\blog' . "/{$blogDetail->id}-1.{$blogDetail->image}") ?? 'default_image_url' }}"

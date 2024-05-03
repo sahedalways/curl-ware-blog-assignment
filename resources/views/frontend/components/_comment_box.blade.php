@@ -33,7 +33,6 @@
 
                         </div>
                     @endforeach
-
                 </div>
             </div>
             @if (auth()->check())

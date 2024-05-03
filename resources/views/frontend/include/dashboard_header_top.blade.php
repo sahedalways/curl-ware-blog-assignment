@@ -7,7 +7,7 @@
             </li>
         </ul>
 
-        <ul class="pr-5 pl-0 list-unstyled d-flex justify-content-between align-items-center">
+        <ul class="pr-5 pl-0 list-unstyled d-flex justify-content-between align-items-center mt-3">
             <!-- Home Link -->
             <li class="nav-item dropdown user-profile-dropdown mr-3">
                 <div>
@@ -24,7 +24,7 @@
             </li>
 
             <li class="nav-item dropdown user-profile-dropdown">
-                <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle user p-0" id="userProfileDropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 </a>
                 <!-- Sign Out Link -->

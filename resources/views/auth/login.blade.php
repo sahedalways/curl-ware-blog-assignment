@@ -8,7 +8,7 @@
 
         <div class="pt-5 d-flex justify-content-center">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('images/main-logo.png') }}" alt="Logo" class="loginLogo">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="loginLogo">
             </a>
         </div>
 
@@ -48,12 +48,13 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="px-4 py-2">
-                                            <label class="fw-semibold primary-text-color form-label"
+                                            <label class="fw-semibold primary-text-color form-label text-dark"
                                                 for="email">Email</label>
                                             <input id="email" type="email"
                                                 class="p-2 form-control w-100  no-outline @error('email') is-invalid @enderror"
                                                 name="email" value="{{ old('email') }}" required autocomplete="email"
-                                                autofocus placeholder="Type email address">
+                                                autofocus placeholder="Type email address"
+                                                style="background-color: rgb(255, 255, 255);">
                                         </div>
                                         @error('email')
                                             <span class="px-4 invalid-feedback" role="alert">{{ $message }}</span>
@@ -63,28 +64,19 @@
 
                                     <div class="form-group">
                                         <div class=" px-4 py-2">
-                                            <label class="fw-semibold form-label primary-text-color"
-                                                for="password">Password</label>
+                                            <label class="fw-semibold form-label primary-text-color text-dark"
+                                                for="password" class="text-dark">Password</label>
                                             <input placeholder="Type password" id="password" type="password"
                                                 class="p-2 form-control w-100  no-outline @error('password') is-invalid @enderror"
-                                                name="password" required autocomplete="current-password">
+                                                name="password" required autocomplete="current-password"
+                                                style="background-color: rgb(255, 255, 255);">
                                         </div>
                                         @error('password')
                                             <span class="px-4 invalid-feedback" role="alert">{{ $message }}</span>
                                         @enderror
                                         <div id="password_error" class="error-message text-center"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="px-4 py-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="remember_me"
-                                                    name="remember_me">
-                                                <label class="form-check-label" for="remember_me">
-                                                    Remember me
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="text-center my-4">
                                         <button id="login-btn" type="button"
                                             class="btn custom-button-style col-md-5 col-10 py-2">Login now</button>
@@ -111,11 +103,12 @@
 
                                     <div class="form-group">
                                         <div class="form-group px-4 py-2">
-                                            <label class="form-label primary-text-color fw-semibold"
+                                            <label class="form-label primary-text-color fw-semibold text-dark"
                                                 for="name">Name</label>
                                             <input id="name" type="text" class="form-control" name="name"
                                                 value="" required autocomplete="name" autofocus
-                                                placeholder="Type your name">
+                                                placeholder="Type your name"
+                                                style="background-color: rgb(255, 255, 255);">
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -126,11 +119,12 @@
 
                                     <div class="form-group">
                                         <div class="form-group px-4 py-2">
-                                            <label class="form-label primary-text-color fw-semibold"
+                                            <label class="form-label primary-text-color fw-semibold text-dark"
                                                 for="email">Email</label>
                                             <input id="registerEmail" type="email" class="form-control" name="email"
                                                 value="" required autocomplete="email" autofocus
-                                                placeholder="Type email address">
+                                                placeholder="Type email address"
+                                                style="background-color: rgb(255, 255, 255);">
                                             @error('email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -142,11 +136,11 @@
 
                                     <div class="form-group">
                                         <div class="form-group px-4 py-2">
-                                            <label class="form-label primary-text-color fw-semibold"
+                                            <label class="form-label primary-text-color fw-semibold text-dark"
                                                 for="password">Password</label>
                                             <input placeholder="Type password" id="registerPassword" value=""
                                                 type="password" class="form-control" name="password" required
-                                                autocomplete="new-password">
+                                                autocomplete="new-password" style="background-color: rgb(255, 255, 255);">
                                             @error('password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -156,12 +150,13 @@
 
                                     <div class="form-group">
                                         <div class="form-group px-4 py-2">
-                                            <label class="form-label primary-text-color fw-semibold"
+                                            <label class="form-label primary-text-color fw-semibold text-dark"
                                                 for="con-password">Confirm
                                                 Password</label>
                                             <input id="password_confirmation" type="password" class="form-control"
                                                 value="" name="password_confirmation" required
-                                                autocomplete="new-password" placeholder="Type confirm password">
+                                                autocomplete="new-password" placeholder="Type confirm password"
+                                                style="background-color: rgb(255, 255, 255);">
                                         </div>
                                         <div id="confirm_password_error" class="error-message text-center"></div>
                                     </div>

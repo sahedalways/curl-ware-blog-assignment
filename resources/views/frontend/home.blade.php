@@ -15,7 +15,7 @@
                                          class="w-100 custom-height">
                                  </div>
                                  <div class="content-sec p-4 ">
-                                     <h4 class="fw-semibold">{{ $blog->title }}</h4>
+                                     <h4 class="fw-semibold text-dark">{{ $blog->title }}</h4>
                                      <p class="press-author">{{ $blog->author->name }}</p>
                                      <div style="font-size: 12px;" class="text-secondary  fw-semibold">
                                          {{ $blog->created_at->format('F d, Y') }}</div>
