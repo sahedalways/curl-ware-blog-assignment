@@ -21,11 +21,16 @@
       </div>
 
 
-      <!--  comment box of blog  -->
+      <!-- Comment box of blog -->
+
       @include('frontend.components._comment_box')
 
-      {{-- edit comment model --}}
-      @include('frontend.components._edit_comment_modal')
+
+      {{-- Edit comment modal --}}
+      @if (auth()->check())
+          @include('frontend.components._edit_comment_modal')
+      @endif
+
   @endsection
 
   @section('script')

@@ -37,6 +37,7 @@ class CommentController extends Controller
     {
         $validatedData = $request->validate([
             'comment' => 'required|max:255',
+            'user_id' => 'required',
             'blog_id' => 'required'
         ]);
 
@@ -46,6 +47,7 @@ class CommentController extends Controller
         // Assign values to the comment properties
         $comment->blog_id = $request->blog_id;
         $comment->author_name = $request->author_name;
+        $comment->user_id = $request->user_id;
         $comment->text = $request->comment;
 
         $comment->save();
