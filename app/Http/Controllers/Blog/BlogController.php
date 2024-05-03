@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -136,5 +137,40 @@ class BlogController extends Controller
 
     $blog->delete();
     return redirect('/blog')->with('warning', 'You just deleted a blog');
+  }
+
+
+  public function blogItemDetails($id)
+  {
+    // Retrieve all blog from the database
+    $blog = Blog::with(['comments' => function ($query) {
+      $query->latest();
+    }])->find($id);
+
+
+    return view('frontend.blog_details', ['blog' => $blog]);
+  }
+
+
+
+  public function postComment(Request $request)
+  {
+    $validatedData = $request->validate([
+      'comment' => 'required|max:255',
+      'blog_id' => 'required'
+    ]);
+
+    // Create a new comment instance
+    $comment = new Comment();
+
+    // Assign values to the comment properties
+    $comment->blog_id = $request->blog_id;
+    $comment->author_name = $request->author_name;
+    $comment->text = $request->comment;
+
+    $comment->save();
+
+
+    return response()->json(['comment' => $comment]);
   }
 }

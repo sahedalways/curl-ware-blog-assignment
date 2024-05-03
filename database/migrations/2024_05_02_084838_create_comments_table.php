@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('author_name')->nullable();
             $table->foreignId('blog_id')->constrained('blogs')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

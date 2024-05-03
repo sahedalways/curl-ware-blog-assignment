@@ -82,6 +82,16 @@
     border-radius: 13px;
 }
 
+.comment {
+    margin-bottom: 20px !important;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .custom-height {
     height: 270px;
 }

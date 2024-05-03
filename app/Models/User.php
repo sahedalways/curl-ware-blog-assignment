@@ -29,11 +29,6 @@ class User extends Authenticatable
         return $this->hasMany(Blog::class);
     }
 
-    // Define a one-to-many relationship between users and comments
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -39,7 +39,10 @@ Route::get('/', function (Request $request) {
 
 
 // blog details page route here
-Route::get('/blog-details/{id}', [PagesController::class, 'blogItemDetails'])->name('blog-details');
+Route::get('/blog-details/{id}', [BlogController::class, 'blogItemDetails'])->name('blog-details');
+
+// for posting comment on specific blog item route
+Route::post('/post-comment', [BlogController::class, 'postComment'])->name('post-comment');
 
 
 // register tab route

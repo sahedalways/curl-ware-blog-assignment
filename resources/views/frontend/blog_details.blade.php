@@ -24,3 +24,8 @@
       <!--  comment box of blog  -->
       @include('frontend.components._comment_box')
   @endsection
+
+  @section('script')
+      {{-- custom js file of comment box --}}
+      <script src="{{ asset('user_assets') }}/js/comment/comment.js"></script>
+  @endsection
