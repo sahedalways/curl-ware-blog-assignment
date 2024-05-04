@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\Comment;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -41,41 +41,41 @@ class BlogController extends Controller
 
   public function store(Request $request)
   {
-    try {
-      // Validate the incoming request data
-      $validatedData = $request->validate([
-        'title' => 'required|unique:blogs|max:255',
-        'content' => 'required',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
-      ]);
+    // Validate the incoming request data
+    $validator = Validator::make($request->all(), [
+      'title' => 'required|unique:blogs|max:255',
+      'content' => 'required',
+      'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
+    ]);
 
-      $validatedData['created_at'] = now();
-      $validatedData['updated_at'] = now();
-      $validatedData['author_id'] = auth()->id();
-
-      // Process the image
-      if ($request->hasFile('image')) {
-        $ext = $request->file('image') ? strtolower($request->file('image')->getClientOriginalExtension()) : '';
-        $validatedData['image'] = $ext;
-      }
-
-      $id = DB::table('blogs')
-        ->insertGetId($validatedData);
-
-      if ($ext) {
-        $file = $request->file('image');
-        $file->move(public_path('images/blog/'), $id . '-1.' . $ext);
-        $pic = Image::make(public_path('images/blog/' . $id . '-1.' . $ext));
-
-        // Save the modified image
-        $pic->save();
-      }
-
-
-      return back()->with('sms', 'New blog created');
-    } catch (\Throwable $th) {
-      return back()->with('sms', $th->getMessage());
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    $validatedData['created_at'] = now();
+    $validatedData['updated_at'] = now();
+    $validatedData['author_id'] = auth()->id();
+
+    // Process the image
+    if ($request->hasFile('image')) {
+      $ext = $request->file('image') ? strtolower($request->file('image')->getClientOriginalExtension()) : '';
+      $validatedData['image'] = $ext;
+    }
+
+    $id = DB::table('blogs')
+      ->insertGetId($validatedData);
+
+    if ($ext) {
+      $file = $request->file('image');
+      $file->move(public_path('images/blog/'), $id . '-1.' . $ext);
+      $pic = Image::make(public_path('images/blog/' . $id . '-1.' . $ext));
+
+      // Save the modified image
+      $pic->save();
+    }
+
+
+    return back()->with('sms', 'New blog created');
   }
 
 
@@ -89,11 +89,15 @@ class BlogController extends Controller
 
   public function update(Request $request, $id)
   {
-    $validatedData = $request->validate([
+    $validator = Validator::make($request->all(), [
       'title' => 'required|max:255',
       'content' => 'required',
       'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
     ]);
+
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator)->withInput();
+    }
 
 
     $selected = DB::table("blogs")->find($id);
