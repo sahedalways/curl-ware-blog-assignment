@@ -42,15 +42,6 @@ Route::get('/', function (Request $request) {
 Route::get('/blog-details/{id}', [BlogController::class, 'blogItemDetails'])->name('blog-details');
 
 
-// for comment related routes on specific blog item route
-Route::controller(CommentController::class)->group(
-    function () {
-        Route::post('/post-comment', 'store')->name('post-comment');
-        Route::get('/get-comment/{commentId}', 'index')->name('get-comment');
-        Route::post('/update-comment', 'update')->name('update-comment');
-        Route::post('/delete-comment', 'destroy')->name('delete-comment');
-    }
-);
 
 // register tab route
 Route::get('/register-process', [RegisterTabController::class, 'getRegisterTab'])->name('register.tab');
@@ -61,10 +52,21 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard'
 
 
 // only user can access below routes
-Route::middleware('is_user')->group(
+Route::middleware('auth')->group(
     function () {
         // blogs route here
         Route::resource('blog', BlogController::class);
+
+
+        // for comment related routes on specific blog item route
+        Route::controller(CommentController::class)->group(
+            function () {
+                Route::post('/post-comment', 'store')->name('post-comment');
+                Route::get('/get-comment/{commentId}', 'index')->name('get-comment');
+                Route::post('/update-comment', 'update')->name('update-comment');
+                Route::post('/delete-comment', 'destroy')->name('delete-comment');
+            }
+        );
     }
 );
 

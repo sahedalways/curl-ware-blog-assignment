@@ -22,7 +22,6 @@
 
 
       <!-- Comment box of blog -->
-
       @include('frontend.components._comment_box')
 
 
